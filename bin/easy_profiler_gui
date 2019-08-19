@@ -1,0 +1,15 @@
+#!/bin/bash
+
+XAUTH_AUTH_FILE=`xauth info | grep "Authority file" | awk '{split($0,a," "); print a[3]}'`
+
+docker run \
+  --name "easy_profiler_gui" \
+  --rm \
+  --security-opt apparmor=unconfined \
+  --net=host \
+  --env DISPLAY="$DISPLAY" \
+  --volume "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
+  --volume "$XAUTH_AUTH_FILE:/root/.Xauthority:ro" \
+  $@ \
+  dannixon/easy_profiler:latest \
+  profiler_gui
