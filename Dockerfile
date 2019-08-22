@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ARG VERSION=2.0.0
+ARG VERSION=2.0.1
 
 RUN curl \
       --location \
